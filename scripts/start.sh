@@ -11,7 +11,7 @@ if [ ! -z "$SSH_KEY" ]; then
     base64 -d /root/.ssh/id_rsa.base64 > /root/.ssh/id_rsa
     chmod 600 /root/.ssh/id_rsa
   else
-    echo -e $SSH_KEY > /root/.ssh/id_rsa
+    echo -e "$SSH_KEY" > /root/.ssh/id_rsa
     chmod 600 /root/.ssh/id_rsa
   fi
 fi
