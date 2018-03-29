@@ -1,4 +1,4 @@
 #!/bin/bash
-for file in /custom_scripts/before_pull/*; do
+for file in $(ls -1 /custom_scripts/before_pull/); do
     "$file"
 done
