@@ -2,7 +2,7 @@
 FROM alpine:3.6
 
 # Install Git, bash, openssh and supervisor
-RUN apk add --no-cache --update git openssh-client supervisor python python-requests
+RUN apk add --no-cache --update git openssh-client supervisor python py-requests
 
 # Copy required files
 COPY conf/supervisord.conf /etc/supervisord.conf
