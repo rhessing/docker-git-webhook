@@ -8,7 +8,7 @@ RUN apk add --no-cache --update bash git openssh supervisor python python-dev py
 # Copy required files
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY scripts/* /usr/bin/
-COPY custom_scripts/* /custom_scripts
+COPY custom_scripts/* /custom_scripts/
 
 # Add permissions to our scripts
 RUN chmod +x /usr/bin/run_custom_scripts_* /usr/bin/docker-hook /usr/bin/hook-listener \
