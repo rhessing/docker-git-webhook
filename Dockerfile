@@ -2,7 +2,7 @@
 FROM alpine:3.6
 
 # Install Git, bash, openssh and supervisor
-RUN apk add --no-cache --update bash git openssh supervisor python python-dev py-pip build-base \
+RUN apk add --no-cache --update git openssh-client supervisor python py-pip \
     && pip install requests
 
 # Copy required files
@@ -19,4 +19,4 @@ RUN chmod +x /usr/bin/run_custom_scripts_* /usr/bin/docker-hook /usr/bin/hook-li
 EXPOSE 8555
 
 # run start script
-CMD ["/bin/bash", "/usr/bin/start.sh"]
+CMD ["/bin/sh", "/usr/bin/start.sh"]
