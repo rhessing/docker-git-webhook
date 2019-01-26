@@ -1,18 +1,25 @@
 # Use AlpineLinux as base image
-FROM alpine:3.6
+FROM alpine:3.6 AS base
 
-# Install Git, bash, openssh and supervisor
-RUN apk add --no-cache --update git openssh-client supervisor python py-requests
+FROM base AS builder
+RUN mkdir /install
 
 # Copy required files
-COPY conf/supervisord.conf /etc/supervisord.conf
-COPY scripts/* /usr/bin/
-COPY custom_scripts/* /custom_scripts/
+COPY conf/supervisord.conf /install/etc/supervisord.conf
+COPY scripts/* /install/usr/bin/
+COPY custom_scripts/* /install/custom_scripts/
 
 # Add permissions to our scripts
-RUN chmod +x /usr/bin/run_custom_scripts_* /usr/bin/docker-hook /usr/bin/hook-listener \
-    && chmod 755 /usr/bin/pull /usr/bin/push \
-    && chmod +x -R /custom_scripts
+RUN chmod +x /install/usr/bin/* 
+RUN chmod 755 /install/usr/bin/pull /install/usr/bin/push
+RUN chmod +x -R /install/custom_scripts
+
+
+FROM base 
+COPY --from=builder /install /
+
+# Install Git, bash, openssh and supervisor
+RUN apk add --no-cache --update git openssh-client supervisor python3 py3-requests
 
 # Expose Webhook port
 EXPOSE 8555
