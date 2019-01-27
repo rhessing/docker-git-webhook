@@ -1,7 +1,23 @@
 # docker-git-webhook
 :whale: Pull your Git code into a data volume ready to use in other containers. Provides a webhook, so that you can get new code pulled in automatically.
 
-##### [Docker hub image: eduwass/docker-git-webhook](https://hub.docker.com/r/eduwass/docker-git-webhook/)
+Please note that this is an improved version of the very neat docker container created by Eduwass (see fork link). 
+
+#### Improvements:
+* Docker image is only 35MB
+* Docker image uses much more native alpine linux tooling
+  * Removed bash, supervisor, openssh-server (including deps), pip, build-tools (gcc, make, etc)
+  * Updated to python3
+
+### Warning
+Currently still in testing phase, image has not been tested so be warned :wink: If you think you can make the image smaller or improve it some way please do but push the code back to me :smile:
+
+##### [Docker hub image: rhessing/docker-git-webhook](https://hub.docker.com/r/rhessing/docker-git-webhook/)
+
+
+
+
+
 
 ### Available Configuration Parameters
 
