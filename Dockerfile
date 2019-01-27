@@ -7,12 +7,13 @@ COPY scripts/* /usr/bin/
 COPY custom_scripts/* /custom_scripts/
 
 # Set permissions and install webhook dependencies
-# Comment: using python2 to keep the image small, the script will work fine with it
-# Once supervisor is compiled with python3 support for alpine this image will be updated
+# Comment: To keep the image small I've kicked out bash, supervisord, 
+#          makes 0 sense to use that in this image. This also enables
+#          us to use python3 instead of python2 (supervisor dep.)
 RUN chmod +x /usr/bin/* \
     && chmod 755 /usr/bin/pull /usr/bin/push \
     && chmod +x -R /custom_scripts \
-    && apk add --no-cache --update git openssh-client supervisor py2-requests
+    && apk add --no-cache --update git openssh-client py3-requests
 
 # Expose Webhook port
 EXPOSE 8555
